@@ -5,7 +5,7 @@ import time
 import logging
 
 from keras.models import Sequential
-from keras.layers import Dense # tensorflow.keras.layers
+from keras.layers import Dense, Input# tensorflow.keras.layers
 
 from preproc.preprocessing.embeddings import embed
 from preproc.preprocessing.utils import LocalTextCategorizationDataset
@@ -47,31 +47,44 @@ def train(dataset_path, train_conf, model_path, add_timestamp):
     # add a dense layer with relu activation
     # add an output layer (multiclass classification problem)
     model = Sequential([
-        Dense(units = train_conf['dense_dim'],activation = "relu",input_shape = (768,)), #units: Positive integer, dimensionality of the output space
+        Input(shape=(5,)),
+        Dense(units = train_conf['dense_dim'],activation = "relu"), #units: Positive integer, dimensionality of the output space
         Dense(units = dataset.get_num_labels(),activation = "softmax")
     ])
 
     # TODO: CODE HERE
     # model fit using data sequences
     model.compile(loss = "categorical_crossentropy", optimizer = "adam", metrics = "accuracy" )
-    train_history = model.fit(dataset.)
+    train_history = model.fit(dataset.get_train_sequence(),
+        epochs=train_conf['epochs'],
+        verbose=train_conf["verbose"],
+        validation_data=dataset.get_test_sequence())
 
     # scores
     scores = model.evaluate_generator(dataset.get_test_sequence(), verbose=0)
+    print(scores)
 
     logger.info("Test Accuracy: {:.2f}".format(scores[1] * 100))
 
     # TODO: CODE HERE
     # create folder artefacts_path
+    os.makedirs("train/data/artefacts/" + artefacts_path)
+
 
     # TODO: CODE HERE
     # save model in artefacts folder, name model.h5
+    model.save(f"train/data/artefacts/{artefacts_path}/model.h5")
 
     # TODO: CODE HERE
     # save train_conf used in artefacts_path/params.json
+    with open(f'train/data/artefacts/{artefacts_path}/params.json', 'w') as f:
+        json.dump(train_conf, f)
 
     # TODO: CODE HERE
     # save labels index in artefacts_path/labels_index.json
+    with open(f'train/data/artefacts/{artefacts_path}/labels_index.json', 'w') as f:
+        labels_index = dataset.get_index_to_label_map()
+        json.dump(labels_index, f)
 
     # train_history.history is not JSON-serializable because it contains numpy arrays
     serializable_hist = {k: [float(e) for e in v] for k, v in train_history.history.items()}
