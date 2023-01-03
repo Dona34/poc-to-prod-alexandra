@@ -30,16 +30,16 @@ class TextPredictionModel:
         """
         # TODO: CODE HERE
         # load model
-        model =load_model.load(artefacts_path/"model.h5")
+        model = load_model(f"{artefacts_path}/model.h5")
 
         # TODO: CODE HERE
         # load params
-        params = json.load(artefacts_path/"params.json")
+        params = json.load(f"{artefacts_path}/params.json")
         # json.load(open(os.path.join(expt_dir, 'params.json'), 'rb'))
 
         # TODO: CODE HERE
         # load labels_to_index
-        labels_to_index = json.load(artefacts_path/"labels_index.json")
+        labels_to_index = json.load(f"{artefacts_path}/labels_index.json")
 
         return cls(model, params, labels_to_index)
 
