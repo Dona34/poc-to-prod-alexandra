@@ -188,7 +188,7 @@ class LocalTextCategorizationDataset(BaseTextCategorizationDataset):
 
         # TODO: CODE HERE
         # from self._dataset, compute the label list
-        self._label_list = list(self._dataset)
+        self._label_list = self._dataset['tag_name'].value_counts().index.values
 
         y = self.to_indexes(self._dataset['tag_name'])
         y = to_categorical(y, num_classes=len(self._label_list))

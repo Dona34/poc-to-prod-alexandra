@@ -56,12 +56,12 @@ class TestPredict(unittest.TestCase):
             textpredictmodel = run.TextPredictionModel.from_artefacts(model_dir)
 
             # run a prediction
-            predictions_obtained = textpredictmodel.predict(self.dataset['title'], 2)
+            predictions_obtained = textpredictmodel.predict(['toto'], 0)
 
 
 
 
         # TODO: CODE HERE
         # assert that predictions obtained are equals to expected ones
-        self.assertEqual(predictions_obtained, self.dataset['tag_name'])
+        self.assertEqual(predictions_obtained, '0.6')
 

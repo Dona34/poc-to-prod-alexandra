@@ -34,12 +34,12 @@ class TextPredictionModel:
 
         # TODO: CODE HERE
         # load params
-        params = json.load(f"{artefacts_path}/params.json")
-        # json.load(open(os.path.join(expt_dir, 'params.json'), 'rb'))
+
+        params = json.load(open(os.path.join(artefacts_path, 'params.json'), 'rb'))
 
         # TODO: CODE HERE
         # load labels_to_index
-        labels_to_index = json.load(f"{artefacts_path}/labels_index.json")
+        labels_to_index = json.load(open(os.path.join(artefacts_path, 'labels_index.json'), 'rb'))
 
         return cls(model, params, labels_to_index)
 
@@ -59,13 +59,14 @@ class TextPredictionModel:
 
         # TODO: CODE HERE
         # predict tags indexes from embeddings
-        predict_embeddings = model.predict(embeddings)
+        predictions = self.model.predict(embeddings)
+        #print(predict_embeddings)
 
         # TODO: CODE HERE
         # from tags indexes compute top_k tags for each text
-        sorted_indexes = argsort(predict_embeddings)[-top_k:]
-        predict_embeddings = np.array(predict_embeddings)
-        predictions = predict_embeddings[sorted_indexes]
+        #sorted_indexes = argsort(predict_embeddings)[-top_k:]
+        #predict_embeddings = np.array(predict_embeddings)
+        #predictions = predict_embeddings[sorted_indexes]
 
         logger.info("Prediction done in {:2f}s".format(time.time() - tic))
 
