@@ -15,17 +15,13 @@ app = Flask(__name__)
 
 @app.route('/predict', methods=['GET'])
 def get_text():
-    #text = request.args.get('text')
-    model = TextPredictionModel.from_artefacts("")
+    model = TextPredictionModel.from_artefacts("C:/Users/alexa/Documents/EPF/5A/From poc to prod/Alexandra_Mille-Egea/Capstone-20221116/poc-to-prod-alexandra/train/data/artefacts/2023-01-03-12-42-59/")
 
-
-    text =  "this is a python script"
-
-    #print(TextPredictionModel.predict(text,3))
+    text = "this is a python script"
 
     predictions = model.predict([text])
     print(predictions)
-    #return jsonify(model.predict(text))
+    return text
 
 
 @app.route('/', methods=['GET'])
