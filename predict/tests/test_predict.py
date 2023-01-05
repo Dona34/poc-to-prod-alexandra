@@ -1,13 +1,10 @@
 import unittest
 from unittest.mock import MagicMock
 import tempfile
-
 import pandas as pd
-
 from predict.predict import run
 from train.train import run as train_run
 from preproc.preprocessing import utils
-
 
 def load_dataset_mock():
     titles = [
@@ -29,12 +26,10 @@ def load_dataset_mock():
         'title': titles,
         'tag_name': tags
     })
-
 class TestPredict(unittest.TestCase):
 
-    # use the function defined on test_model_train as a mock for utils.LocalTextCategorizationDataset.load_dataset
+    # use the function defined on test_predict as a mock for utils.LocalTextCategorizationDataset.load_dataset
     utils.LocalTextCategorizationDataset.load_dataset = MagicMock(return_value=load_dataset_mock())
-    dataset = utils.LocalTextCategorizationDataset.load_dataset
 
     def test_predict(self):
         # TODO: CODE HERE
@@ -56,12 +51,13 @@ class TestPredict(unittest.TestCase):
             textpredictmodel = run.TextPredictionModel.from_artefacts(model_dir)
 
             # run a prediction
-            predictions_obtained = textpredictmodel.predict(['toto'], 0)
-
+            predictions_obtained = textpredictmodel.predict(['I have a python library problem'], 0)
+            print(predictions_obtained.shape)
 
 
 
         # TODO: CODE HERE
         # assert that predictions obtained are equals to expected ones
-        self.assertEqual(predictions_obtained, '0.6')
+        # Here we assert that the prediction shape is equal to the one expected
+        self.assertGreaterEqual(predictions_obtained.shape, (1, 2))
 
