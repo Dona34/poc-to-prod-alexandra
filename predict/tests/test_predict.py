@@ -51,7 +51,7 @@ class TestPredict(unittest.TestCase):
             textpredictmodel = run.TextPredictionModel.from_artefacts(model_dir)
 
             # run a prediction
-            predictions_obtained = textpredictmodel.predict(['php'], 0)
+            predictions_obtained = textpredictmodel.predict(['php'], 2)
             print(predictions_obtained)
 
 
