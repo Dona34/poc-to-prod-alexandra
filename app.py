@@ -20,7 +20,7 @@ def get_text():
     text = "this is a python script"
 
     predictions = model.predict(text)
-    print(predictions)
+    #print(predictions)
     return text
 
 

@@ -68,7 +68,7 @@ class TextPredictionModel:
             indices = argsort(i)[-top_k:]
             print("indices", indices)
             #list_indices = [index.argmin() for index in indices]
-            #print("list indices", list_indices)
+            ##print("list indices", list_indices)
             predictions = [self.labels_index_inv[index] for index in indices]
             print("predictions", predictions)
 
