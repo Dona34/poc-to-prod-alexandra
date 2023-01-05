@@ -65,7 +65,7 @@ def train(dataset_path, train_conf, model_path, add_timestamp):
 
     # scores
     scores = model.evaluate_generator(dataset.get_test_sequence(), verbose=0)
-    print(scores)
+    #print(scores)
 
     logger.info("Test Accuracy: {:.2f}".format(scores[1] * 100))
 

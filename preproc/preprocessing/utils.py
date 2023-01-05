@@ -92,7 +92,7 @@ class BaseTextCategorizationDataset:
         returns number of test batches
         """
         # TODO: CODE HERE
-        print(self._get_num_test_samples()/self.batch_size)
+        #print(self._get_num_test_samples()/self.batch_size)
         return integer_floor(self._get_num_test_samples()/self.batch_size)
 
     def get_train_batch(self):
