@@ -9,7 +9,6 @@ from keras.models import load_model
 from numpy import argsort
 
 from preproc.preprocessing.embeddings import embed
-from preproc.preprocessing.utils import get_index_to_label_map # BaseTextCategorizationDataset
 
 import logging
 
@@ -61,19 +60,21 @@ class TextPredictionModel:
         # TODO: CODE HERE
         # predict tags indexes from embeddings
         predictions = self.model.predict(embeddings)
-        #print(predict_embeddings)
+
 
         # TODO: CODE HERE
         # from tags indexes compute top_k tags for each text
-        sorted_indexes = argsort(predictions)[-top_k:]
-        sorted_indexes = np.array(sorted_indexes)
-        #predictions = predict_embeddings[sorted_indexes]
-        sorted_indexes = get_index_to_label_map(sorted_indexes)
-        print(sorted_indexes)
+        for i in predictions:
+            indices = argsort(i)[-top_k:]
+            print("indices", indices)
+            #list_indices = [index.argmin() for index in indices]
+            #print("list indices", list_indices)
+            predictions = [self.labels_index_inv[index] for index in indices]
+            print("predictions", predictions)
 
         logger.info("Prediction done in {:2f}s".format(time.time() - tic))
 
-        return sorted_indexes
+        return predictions
 
 
 if __name__ == "__main__":
