@@ -1,6 +1,6 @@
 # Poc-to-prod
 
-The goal is to predict some #thematic linked to a title forum from stackoverflow. We want to return the top-k predictions #thematics from 50 available for a given title, to automate the process of #.
+The goal is to predict some #topics linked to a title forum from stackoverflow. We want to return the top-k predictions #topics from 50 available for a given title, to automate the process of #.
 
 ## Description
 
