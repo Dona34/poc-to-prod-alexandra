@@ -49,8 +49,8 @@ def train(dataset_path, train_conf, model_path, add_timestamp):
     # add a dense layer with relu activation
     # add an output layer (multiclass classification problem)
     model = Sequential([
-        Input(shape=(768,)),  # embedding shape, visible in test_embeddings
-        Dense(units=train_conf['dense_dim'], activation="relu"),
+        #Input(shape=(768,)),  # embedding shape, visible in test_embeddings
+        Dense(units=train_conf['dense_dim'], activation="relu", input_shape=(dataset.get_train_batch()[0].shape[-1],)),
         # units: Positive integer, dimensionality of the output space
         Dense(units=dataset.get_num_labels(), activation="softmax")
     ])
