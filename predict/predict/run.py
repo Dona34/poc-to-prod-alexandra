@@ -63,19 +63,9 @@ class TextPredictionModel:
 
 
         # TODO: CODE HERE
-        # from tags indexes compute top_k tags for each text
-        #for i in predictions:
-            #indices = argsort(i)[-top_k:]
-            #print("indices", indices)
-            #list_indices = [index.argmin() for index in indices]
-            ##print("list indices", list_indices)
-            #predictions = [self.labels_index_inv[index] for index in indices]
-            #print("predictions", predictions)
-
-            # from tags indexes compute top_k tags for each text
+        # from tags indexes compute top_k tags
         indices = argsort(predictions)[0][-top_k:]
 
-            # list_indices = [index.argmin() for index in indices]
         predictions = [self.labels_to_index.get(str(index)) for index in indices]
 
         logger.info("Prediction done in {:2f}s".format(time.time() - tic))
