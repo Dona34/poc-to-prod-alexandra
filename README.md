@@ -42,8 +42,5 @@ Itwill appear on http://localhost:5000/predict_text
 
 ## Author
 
-Contributor name
-
-ex. Dominique Pizzie  
-ex. [@Dona34](https://github.com/Dona34)
+[@Dona34](https://github.com/Dona34)
 
